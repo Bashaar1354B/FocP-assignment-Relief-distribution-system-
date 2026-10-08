@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="FocP assignment(Relief distribution system)/FocP assignment(Relief distribution system).vcxproj" />
+</Solution>
