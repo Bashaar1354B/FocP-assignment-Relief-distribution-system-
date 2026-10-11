@@ -1,3 +1,4 @@
+//Read the "README" file before running program
 #include <iostream>
 using namespace std;
 
@@ -10,12 +11,12 @@ int TrucksCheck(int RemainTrucks, int Trucks, int Score)
 	}
 	else if(RemainTrucks > 0)
 	{
-		cout << "Insuffiecient number of remaining trucks. The number needed was " << Trucks * Score / 100 << ", but we only have " << RemainTrucks << ", so sending all remaining trucks";
+		cout << "Insuffiecient number of remaining trucks. The number needed was " << Trucks * Score / 100 << ", but we only have " << RemainTrucks << ", so sending all remaining trucks" << endl;
 		RemainTrucks = 0;
 	}
 	else
 	{
-		cout << "No trucks can be sent";
+		cout << "No trucks can be sent" << endl;
 	}
 	return RemainTrucks;
 }
@@ -29,12 +30,12 @@ int SupplyCheck(int RemainSupply, int Supply, int Score)
 	}
 	else if (RemainSupply > 0)
 	{
-		cout << "Insuffiecient number of remaining Supply. The number needed was " << Supply * Score / 100 << ", but we only have " << RemainSupply << ", so sending all remaining Supply";
+		cout << "Insuffiecient number of remaining Supply. The number needed was " << Supply * Score / 100 << ", but we only have " << RemainSupply << ", so sending all remaining Supply" << endl;
 		RemainSupply = 0;
 	}
 	else
 	{
-		cout << "No Supply can be sent";
+		cout << "No Supply can be sent" << endl;
 	}
 	return RemainSupply;
 }
@@ -48,12 +49,12 @@ int AmbulanceCheck(int RemainAmbulance, int Ambulance, int Score)
 	}
 	else if (RemainAmbulance > 0)
 	{
-		cout << "Insuffiecient number of remaining Ambulances. The number needed was " << Ambulance * Score / 100 << ", but we only have " << RemainAmbulance << ", so sending all remaining Ambulances.";
+		cout << "Insuffiecient number of remaining Ambulances. The number needed was " << Ambulance * Score / 100 << ", but we only have " << RemainAmbulance << ", so sending all remaining Ambulances." << endl;
 		RemainAmbulance = 0;
 	}
 	else
 	{
-		cout << "No Ambulances can be sent";
+		cout << "No Ambulances can be sent" << endl;;
 	}
 	return RemainAmbulance;
 }
@@ -61,14 +62,14 @@ int AmbulanceCheck(int RemainAmbulance, int Ambulance, int Score)
 int main()
 {
 	string AccessRoute, Warnings, ReliefNeeded, CommunictaionStatus;
-	int RemainTrucks = 10, Trucks = 10, RemainSupply = 120, Supply = 120, Helicopters = 2, TempScore, RemainAmbulances = 5, Ambulances = 5, Topology, AreaType, PreviousAid, DamageLevel, PeopleInjured, score = 0;
+	int RemainTrucks = 10, Trucks = 10, RemainSupply = 120, Supply = 120, Helicopters = 2, TempScore, RemainAmbulances = 5, Ambulances = 5, Topology, AreaType, PreviousAid, DamageLevel, PeopleInjured, score;
 
 	cout << "Is there any relief needed(Yes/No): ";
 	cin >> ReliefNeeded;
 
 	while (ReliefNeeded == "Yes" || ReliefNeeded == "yes" || ReliefNeeded == "YES")
 	{
-
+		score = 0;
 		cout << "Were there any previous warnings or signs of the Tornado(Yes/No): ";
 		cin >> Warnings;
 		cout << "Enter the damage/destruction level caused by the Tornado from 1-5: ";
@@ -103,15 +104,7 @@ int main()
 		else if (PeopleInjured > 150)
 			score += 20;
 		//
-		switch (PreviousAid)
-		{
-		case 1:
-			score -= 5;
-			break;
-		case 2:
-			score += 10;
-			break;
-		}
+		score += (PreviousAid == 1) ? -5 : 10;
 		//
 		if (CommunictaionStatus == "Offline" || CommunictaionStatus == "offline" || CommunictaionStatus == "OFFLINE")
 			score += 10;
@@ -161,7 +154,7 @@ int main()
 				}
 				else
 				{
-					cout << "There is no remaining helicopter to be sent.";
+					cout << "There is no remaining helicopter to be sent." << endl;
 				}
 			}
 			else
@@ -176,6 +169,7 @@ int main()
 			cout << "No resources were sent because the score calculated was 0." << endl;
 		}
 		//Checking whether there is more relief needed
+		cout << "********" << endl;
 		if (RemainAmbulances != 0 || RemainTrucks != 0)
 		{
 			cout << "Is there any more places where relief is needed(Yes/No): ";
@@ -186,7 +180,6 @@ int main()
 			cout << "There can be no more relief provided due to insufficient resources." << endl;
 			break;
 		}
-
 	}
 	return 0;
 }
