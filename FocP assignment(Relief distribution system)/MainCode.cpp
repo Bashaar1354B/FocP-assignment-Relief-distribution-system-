@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-int TrucksCheck(int RemainTrucks, int Trucks, int Score)
+int TrucksCheck(int RemainTrucks, int Trucks, int Score)	//Reuseable block of code for sending trucks so that there is no need to write it multiple times in the main code
 {
 	if (RemainTrucks >= Trucks * Score / 100)
 	{
@@ -21,7 +21,7 @@ int TrucksCheck(int RemainTrucks, int Trucks, int Score)
 	return RemainTrucks;
 }
 
-int SupplyCheck(int RemainSupply, int Supply, int Score)
+int SupplyCheck(int RemainSupply, int Supply, int Score)	//Reuseable block of code for sending Supply so that there is no need to write it multiple times in the main code
 {
 	if (RemainSupply >= Supply* Score / 100)
 	{
@@ -40,7 +40,7 @@ int SupplyCheck(int RemainSupply, int Supply, int Score)
 	return RemainSupply;
 }
 
-int AmbulanceCheck(int RemainAmbulance, int Ambulance, int Score)
+int AmbulanceCheck(int RemainAmbulance, int Ambulance, int Score)	//Reuseable block of code for sending ambulances so that there is no need to write it multiple times in the main code
 {
 	if (RemainAmbulance >= Ambulance * Score / 100)
 	{
@@ -72,7 +72,7 @@ int main()
 		score = 0;
 		cout << "Were there any previous warnings or signs of the Tornado(Yes/No): ";
 		cin >> Warnings;
-		cout << "Enter the damage/destruction level caused by the Tornado from 1-5: ";
+		cout << "Enter the damage/destruction level caused by the Tornado from 0-5: ";
 		cin >> DamageLevel;
 		cout << "Enter the Number of people injured during the event: ";
 		cin >> PeopleInjured;
@@ -80,7 +80,7 @@ int main()
 		cin >> PreviousAid;
 		cout << "Enter what the communication status is in the area(Online/Offline): ";
 		cin >> CommunictaionStatus;
-		cout << "Is there any obstruction in the route to the area(Yes/No): ";
+		cout << "Is the access route open to the area(Yes/No): ";
 		cin >> AccessRoute;
 		cout << "What is the type of area(press 1 for Rural or 2 for Urban): ";
 		cin >> AreaType;
@@ -89,12 +89,12 @@ int main()
 		
 		//Calculating the Need score
 
-		//
+		//Calculating score addition by Damage Level
 		score += DamageLevel * 5;
-		//
+		//Calculating score addition using the input of previous warning of disaster
 		if (Warnings == "No" || Warnings == "no" || Warnings == "NO")
 			score += 5;
-		//
+		//Calculating addition of score based on ranges of people injured
 		if (PeopleInjured <= 50 && PeopleInjured > 10)
 			score += 5;
 		else if (PeopleInjured <= 100 && PeopleInjured > 50)
@@ -103,12 +103,12 @@ int main()
 			score += 15;
 		else if (PeopleInjured > 150)
 			score += 20;
-		//
+		//Using a ternary operator to change score using the input from prvious aid given
 		score += (PreviousAid == 1) ? -5 : 10;
-		//
+		//Communication status score editor
 		if (CommunictaionStatus == "Offline" || CommunictaionStatus == "offline" || CommunictaionStatus == "OFFLINE")
 			score += 10;
-		//
+		//changing score based on the topology of the area
 		switch (Topology)
 		{
 		case 1:
@@ -121,10 +121,10 @@ int main()
 			score += 5;
 			break;
 		}
-		//
-		if (AccessRoute == "No" || AccessRoute == "no" || AccessRoute == "NO")
+		//Changing score based on is the access route is open or not
+		if (AccessRoute == "Yes" || AccessRoute == "yes" || AccessRoute == "YES")
 			score += 5;
-		//
+		//Changing score based on the type of area the disaster took place in
 		switch (AreaType)
 		{
 		case 1:
@@ -140,7 +140,7 @@ int main()
 		if (score > 0)
 		{
 			RemainSupply = SupplyCheck(RemainSupply, Supply, score);
-			if (Topology == 1 || AccessRoute == "Yes" || AccessRoute == "yes" || AccessRoute == "YES")
+			if (Topology == 1 || AccessRoute == "No" || AccessRoute == "NO" || AccessRoute == "no")
 			{
 				TempScore = score - 20;
 				if (TempScore < 0)
@@ -168,12 +168,16 @@ int main()
 		{
 			cout << "No resources were sent because the score calculated was 0." << endl;
 		}
+		cout << endl;
+		cout << "There are " << RemainAmbulances << " Ambulances left, " << RemainTrucks << " Trucks left, " << RemainSupply << " Supply remains and " << Helicopters << " Helicopters remain." << endl;
+		
 		//Checking whether there is more relief needed
 		cout << "********" << endl;
 		if (RemainSupply != 0 || RemainTrucks != 0)
 		{
 			cout << "Is there any more places where relief is needed(Yes/No): ";
 			cin >> ReliefNeeded;
+
 		}
 		else
 		{
