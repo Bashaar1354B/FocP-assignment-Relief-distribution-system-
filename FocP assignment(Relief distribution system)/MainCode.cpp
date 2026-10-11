@@ -170,7 +170,7 @@ int main()
 		}
 		//Checking whether there is more relief needed
 		cout << "********" << endl;
-		if (RemainAmbulances != 0 || RemainTrucks != 0)
+		if (RemainSupply != 0 || RemainTrucks != 0)
 		{
 			cout << "Is there any more places where relief is needed(Yes/No): ";
 			cin >> ReliefNeeded;
